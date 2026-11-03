@@ -1,0 +1,414 @@
+{
+  "project": "soylesem_ayip_mi_ep09",
+  "source": "source/A_cam.mp4 (720x1280, 30fps, 50.0s)",
+  "duration": 52.2,
+  "visual_strategy": "editorial_cinematic_social",
+  "output": {
+    "resolution": "1080x1920",
+    "fps": 30,
+    "video": "H.264 CRF16 high",
+    "audio": "AAC 48kHz, -14 LUFS"
+  },
+  "timing_note": "start/end = final video zamanı; src_start/src_end = kaynak zamanı. Kaynak 5.80 sn'de 1.4 sn jenerik eklenir, sonda 0.8 sn hold.",
+  "global_treatment": {
+    "grade": "warm-neutral, soft contrast (0.96), sat 0.94, highlight koruma, hafif grain",
+    "audio": "HPF 80Hz, hafif afftdn, loudnorm -14 LUFS; minimal ambient pad (üretildi) jenerikten itibaren",
+    "captions": "BEKLEMEDE — transkript alınamadı (ASR modeli indirilemedi). Transkript gelince captions.srt + alt yazı katmanı eklenecek."
+  },
+  "rhythm_targets_check": {
+    "framing_changes": 16,
+    "editorial_text_moments": 5,
+    "broll_inserts": 2,
+    "masking_moments": 3,
+    "controlled_moves": 5,
+    "hard_punch_in": 1,
+    "silence_or_music_drop": 2
+  },
+  "beats": [
+    {
+      "src_start": 0,
+      "src_end": 3.23,
+      "start": 0,
+      "end": 3.23,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "HOOK",
+      "camera_action": "medium_locked + 3% micro_push",
+      "crop_scale": [
+        1.0,
+        1.03
+      ],
+      "anchor": [
+        0.5,
+        0.47
+      ],
+      "editorial_text": null,
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean; music_off",
+      "reason": "İlk soru yüz/kamera temasıyla; tek micro push dışında hiçbir şey dikkat dağıtmasın."
+    },
+    {
+      "src_start": 3.23,
+      "src_end": 5.8,
+      "start": 3.23,
+      "end": 5.8,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "HOOK",
+      "camera_action": "reframe_left_negative_space, stable",
+      "crop_scale": [
+        1.08,
+        1.08
+      ],
+      "anchor": [
+        0.4,
+        0.45
+      ],
+      "editorial_text": null,
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut -> title_card",
+      "audio_action": "dialog_clean; music_off",
+      "reason": "'Peki … ayıp mı?' imza sorusu: yüz sağa kayar, sol negative space jeneriğe nefes hazırlar."
+    },
+    {
+      "src_start": null,
+      "src_end": null,
+      "start": 5.8,
+      "end": 7.2,
+      "spoken_text": null,
+      "narrative_role": "TITLE_CARD",
+      "camera_action": "static",
+      "crop_scale": null,
+      "anchor": null,
+      "editorial_text": "SÖYLESEM / AYIP MI?",
+      "broll_asset": "generated: brand title card (krem zemin, serif)",
+      "masking": null,
+      "transition": "fade_in 0.2 / hard_cut out",
+      "audio_action": "music_in (soft pad, -30 LUFS altı); dialog yok",
+      "reason": "Seri kimliği. Jenerik asset verilmediği için playbook paletine göre üretildi; 1.4 sn (1.2–1.7 aralığı)."
+    },
+    {
+      "src_start": 5.8,
+      "src_end": 7.67,
+      "start": 7.2,
+      "end": 9.07,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "TRIPLE",
+      "camera_action": "wide_locked",
+      "crop_scale": [
+        1.0,
+        1.0
+      ],
+      "anchor": [
+        0.42,
+        0.45
+      ],
+      "editorial_text": "SESSİZ",
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Jenerik sonrası görsel durum değişmeli: en geniş plan. Üçlemenin ilk basamağı 100%."
+    },
+    {
+      "src_start": 7.67,
+      "src_end": 8.9,
+      "start": 9.07,
+      "end": 10.3,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "TRIPLE",
+      "camera_action": "close, step +6%",
+      "crop_scale": [
+        1.06,
+        1.06
+      ],
+      "anchor": [
+        0.5,
+        0.4
+      ],
+      "editorial_text": "ÖLÇÜLÜ (alt sol, krem, koyu tişört üstünde)",
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Üçleme gerilimi kademeli: 100→106."
+    },
+    {
+      "src_start": 8.9,
+      "src_end": 12.0,
+      "start": 10.3,
+      "end": 13.4,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "TRIPLE",
+      "camera_action": "close, step +12%, slow drift",
+      "crop_scale": [
+        1.12,
+        1.14
+      ],
+      "anchor": [
+        0.5,
+        0.4
+      ],
+      "editorial_text": "KABUL EDİLEBİLİR (alt sol, krem)",
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Üçlemenin zirvesi 112%; kelime negative space'te kalır."
+    },
+    {
+      "src_start": 12.0,
+      "src_end": 15.97,
+      "start": 13.4,
+      "end": 17.37,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "QUESTION",
+      "camera_action": "pull_wide + off-axis reframe",
+      "crop_scale": [
+        1.05,
+        1.06
+      ],
+      "anchor": [
+        0.6,
+        0.45
+      ],
+      "editorial_text": null,
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Ana soru: sorular geniş nefes alır; yüz sağ üçte bire kayar, metin yok — izleyici düşünsün."
+    },
+    {
+      "src_start": 15.97,
+      "src_end": 18.63,
+      "start": 17.37,
+      "end": 20.03,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "EXAMPLE",
+      "camera_action": "medium 104% -> detail insert hands 16.40–18.00 (2.6x)",
+      "crop_scale": [
+        1.04,
+        1.04
+      ],
+      "anchor": [
+        0.5,
+        0.45
+      ],
+      "editorial_text": null,
+      "broll_asset": "source detail crop: eller (16.40–18.00, aynı çekim, senkron)",
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Zevk/beklenti örneği somutlaşırken göz yeni bilgi alır; harici arşiv verilmediği için aynı günün detay planı kullanıldı. Ses devam eder (L-cut mantığı)."
+    },
+    {
+      "src_start": 18.63,
+      "src_end": 21.1,
+      "start": 20.03,
+      "end": 22.5,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "OBSERVATION",
+      "camera_action": "medium, slow push 4%",
+      "crop_scale": [
+        1.04,
+        1.08
+      ],
+      "anchor": [
+        0.45,
+        0.42
+      ],
+      "editorial_text": null,
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Gözlem: yavaş push-in."
+    },
+    {
+      "src_start": 21.1,
+      "src_end": 24.43,
+      "start": 22.5,
+      "end": 25.83,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "EXAMPLE",
+      "camera_action": "medium -> eye-line detail insert 21.6–23.2 (1.9x)",
+      "crop_scale": [
+        1.02,
+        1.02
+      ],
+      "anchor": [
+        0.5,
+        0.45
+      ],
+      "editorial_text": null,
+      "broll_asset": "source detail crop: göz hattı (21.6–23.2)",
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "'Bize yakışır mı' tereddüdü: bakışa yakın detay, düşünmeyi hissettirir."
+    },
+    {
+      "src_start": 24.43,
+      "src_end": 27.33,
+      "start": 25.83,
+      "end": 28.73,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "CONTRAST",
+      "camera_action": "reframe (sınırlı crop payı): hafif sola kaydırma, metin üst-sol",
+      "crop_scale": [
+        1.12,
+        1.12
+      ],
+      "anchor": [
+        0.4,
+        0.5
+      ],
+      "editorial_text": "KİMSE “DEĞİŞ” DEMEDİ.",
+      "broll_asset": null,
+      "masking": "text arka katmanda (saç luma mask) — yalnızca saçla kesiştiği kenarlarda",
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "'Ama/oysa' dönüşü kompozisyon değişikliği ister; metin kafa arkasından geçer."
+    },
+    {
+      "src_start": 27.33,
+      "src_end": 30.37,
+      "start": 28.73,
+      "end": 31.77,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "CONTRAST",
+      "camera_action": "tighter recenter",
+      "crop_scale": [
+        1.14,
+        1.16
+      ],
+      "anchor": [
+        0.5,
+        0.43
+      ],
+      "editorial_text": "AMA DEĞİŞTİK.",
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Karşı cümle 0.6 sn sonra gelir; daha yakın kadraj iddiayı sertleştirir."
+    },
+    {
+      "src_start": 30.37,
+      "src_end": 33.7,
+      "start": 31.77,
+      "end": 35.1,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "TRIPLE",
+      "camera_action": "medium 104% + frame narrowing starts",
+      "crop_scale": [
+        1.04,
+        1.06
+      ],
+      "anchor": [
+        0.55,
+        0.47
+      ],
+      "editorial_text": null,
+      "broll_asset": null,
+      "masking": "krem çerçeve içeri daralır 0→4%",
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Kendini sansür üçlemesi: kadrajın daralması 'kendimizden eksiltmek' metaforu (playbook §8)."
+    },
+    {
+      "src_start": 33.7,
+      "src_end": 38.93,
+      "start": 35.1,
+      "end": 40.33,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "TRIPLE",
+      "camera_action": "push 108→114 in two steps + frame narrowing 4→9%",
+      "crop_scale": [
+        1.08,
+        1.14
+      ],
+      "anchor": [
+        0.5,
+        0.43
+      ],
+      "editorial_text": null,
+      "broll_asset": null,
+      "masking": "krem çerçeve 4→9% daralır; 36.0'da üçüncü basamak",
+      "transition": "hard_cut",
+      "audio_action": "dialog_clean",
+      "reason": "Üçlemenin ikinci/üçüncü basamağı; hem yaklaşma hem daralma."
+    },
+    {
+      "src_start": 38.93,
+      "src_end": 42.37,
+      "start": 40.33,
+      "end": 43.77,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "EMOTIONAL_TURN",
+      "camera_action": "release: frame opens, wide 102% slow drift",
+      "crop_scale": [
+        1.02,
+        1.04
+      ],
+      "anchor": [
+        0.5,
+        0.4
+      ],
+      "editorial_text": "KABUL EDİLMEK İÇİN / DÖNÜŞTÜĞÜN KİŞİYE / ALIŞMAK (alt üçte bir, krem)",
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hard_cut",
+      "audio_action": "music -1.5 dB",
+      "reason": "Çerçeve bir anda açılır (rahatlama ama acı tespit). 2+ sn okunabilir serif metin."
+    },
+    {
+      "src_start": 42.37,
+      "src_end": 46.6,
+      "start": 43.77,
+      "end": 48.0,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "CLIMAX",
+      "camera_action": "hold 106% -> single punch-in 106→120 in 0.3s @44.9",
+      "crop_scale": [
+        1.06,
+        1.2
+      ],
+      "anchor": [
+        0.5,
+        0.45
+      ],
+      "editorial_text": null,
+      "broll_asset": null,
+      "masking": "gecikmeli reflection (ghost, %16 opak, 6 kare gecikme) 45.0–46.2",
+      "transition": "hard_cut",
+      "audio_action": "music ducked -2 dB before climax",
+      "reason": "Bölümün tek sert punch-in'i en sert tespit 'rol yaptığını unutmak' için; gecikmeli yansıma 'iki versiyon' fikrini fark ettirmeden kurar."
+    },
+    {
+      "src_start": 46.6,
+      "src_end": 50.0,
+      "start": 48.0,
+      "end": 51.4,
+      "spoken_text": "[transkript bekliyor]",
+      "narrative_role": "FINAL_QUESTION",
+      "camera_action": "wide, slow pull-out 110→100 + 0.8s hold + fade to black",
+      "crop_scale": [
+        1.1,
+        1.0
+      ],
+      "anchor": [
+        0.42,
+        0.45
+      ],
+      "editorial_text": "ŞU AN YAŞADIĞIMIZ / HAYAT KİMİN?",
+      "broll_asset": null,
+      "masking": null,
+      "transition": "hold 0.8s -> fade_to_black 0.6s",
+      "audio_action": "music almost cut (-12 dB), dialog only",
+      "reason": "Cevap verilmez: alan açılır, müzik çekilir, soru ekranda kalır."
+    }
+  ]
+}
