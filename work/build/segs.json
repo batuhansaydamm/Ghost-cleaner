@@ -1,0 +1,119 @@
+[
+ {
+  "id": "hook",
+  "src_in": 132.92,
+  "src_out": 137.3,
+  "start": 0,
+  "dur": 4.38,
+  "zoom": 1.06,
+  "speed": 1
+ },
+ {
+  "id": "intro",
+  "src_in": 1.07,
+  "src_out": 4.51,
+  "start": 4.38,
+  "dur": 3.44,
+  "zoom": 1.0,
+  "speed": 1
+ },
+ {
+  "id": "tee1",
+  "src_in": 4.69,
+  "src_out": 6.71,
+  "start": 7.82,
+  "dur": 2.02,
+  "zoom": 1.1,
+  "speed": 1
+ },
+ {
+  "id": "tee2",
+  "src_in": 8.58,
+  "src_out": 10.56,
+  "start": 9.84,
+  "dur": 1.98,
+  "zoom": 1.0,
+  "speed": 1
+ },
+ {
+  "id": "tee3",
+  "src_in": 13.68,
+  "src_out": 16.15,
+  "start": 11.82,
+  "dur": 2.47,
+  "zoom": 1.18,
+  "speed": 1
+ },
+ {
+  "id": "cap1",
+  "src_in": 25.41,
+  "src_out": 27.08,
+  "start": 14.29,
+  "dur": 1.67,
+  "zoom": 1.0,
+  "speed": 1
+ },
+ {
+  "id": "cap2",
+  "src_in": 30.95,
+  "src_out": 33.66,
+  "start": 15.96,
+  "dur": 2.71,
+  "zoom": 1.12,
+  "speed": 1
+ },
+ {
+  "id": "jkt1",
+  "src_in": 41.97,
+  "src_out": 44.29,
+  "start": 18.67,
+  "dur": 2.32,
+  "zoom": 1.0,
+  "speed": 1
+ },
+ {
+  "id": "jkt2",
+  "src_in": 49.09,
+  "src_out": 52.46,
+  "start": 20.99,
+  "dur": 3.37,
+  "zoom": 1.06,
+  "speed": 1
+ },
+ {
+  "id": "ramp",
+  "src_in": 63.2,
+  "src_out": 73.2,
+  "start": 24.36,
+  "dur": 2.5,
+  "zoom": 1.0,
+  "speed": 4
+ },
+ {
+  "id": "tones",
+  "src_in": 84.38,
+  "src_out": 87.26,
+  "start": 26.86,
+  "dur": 2.88,
+  "zoom": 1.1,
+  "speed": 1
+ },
+ {
+  "id": "collab",
+  "src_in": 131.4,
+  "src_out": 132.9,
+  "start": 29.74,
+  "dur": 1.5,
+  "zoom": 1.0,
+  "speed": 1
+ },
+ {
+  "id": "end",
+  "src_in": 137.3,
+  "src_out": 139.87,
+  "start": 31.24,
+  "dur": 2.57,
+  "zoom": 1.15,
+  "speed": 1
+ }
+]

@@ -1,0 +1,14 @@
+# large media & build intermediates
+src/
+build/*.mov
+build/*.mp4
+build/*.wav
+build/*.png
+build/*.jpg
+build/*.json
+!build/segs.json
+edit/assets/base.mp4
+edit/.hyperframes/
+fonts/node_modules/
+fonts/package-lock.json
+*.mp4

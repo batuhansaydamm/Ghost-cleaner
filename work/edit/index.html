@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="tr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/lib/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Stencil"; font-weight: 900; src: url(assets/fonts/big-shoulders-stencil-display-latin-ext-900-normal.woff2) format("woff2");
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+      @font-face { font-family: "Stencil"; font-weight: 900; src: url(assets/fonts/big-shoulders-stencil-display-latin-900-normal.woff2) format("woff2");
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+      @font-face { font-family: "Plex"; font-weight: 500; src: url(assets/fonts/ibm-plex-mono-latin-ext-500-normal.woff2) format("woff2");
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+      @font-face { font-family: "Plex"; font-weight: 500; src: url(assets/fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2");
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+      @font-face { font-family: "Plex"; font-weight: 700; src: url(assets/fonts/ibm-plex-mono-latin-ext-700-normal.woff2) format("woff2");
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+      @font-face { font-family: "Plex"; font-weight: 700; src: url(assets/fonts/ibm-plex-mono-latin-700-normal.woff2) format("woff2");
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+      @font-face { font-family: "Serif"; font-style: italic; src: url(assets/fonts/instrument-serif-latin-ext-400-italic.woff2) format("woff2");
+        unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+      @font-face { font-family: "Serif"; font-style: italic; src: url(assets/fonts/instrument-serif-latin-400-italic.woff2) format("woff2");
+        unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
+      :root {
+        --kobalt: #1e4fc9;
+        --okra: #c38a2c;
+        --antrasit: #3b3538;
+        --krem: #efe6d2;
+        --kraft: #c9a26e;
+        --ink: #1b1714;
+        --red: #c8322b;
+        --tape: #f2c230;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; font-family: "Plex", monospace; }
+      #base { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.025); }
+      #ov { position: absolute; inset: 0; pointer-events: none; }
+      .abs { position: absolute; }
+      .hide { opacity: 0; visibility: hidden; }
+
+      /* paper */
+      .kraft {
+        background-color: var(--kraft);
+        background-image:
+          url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 0.25  0 0 0 0 0.17  0 0 0 0 0.08  0 0 0 0.55 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>"),
+          radial-gradient(120% 90% at 30% 20%, rgba(255,240,210,.35), rgba(0,0,0,0) 60%),
+          linear-gradient(180deg, rgba(0,0,0,0) 70%, rgba(60,35,10,.18));
+        color: var(--ink);
+        box-shadow: 0 30px 60px rgba(30, 15, 0, .35), 0 6px 14px rgba(30, 15, 0, .25);
+      }
+      .mono { font-family: "Plex", monospace; font-weight: 500; letter-spacing: .04em; }
+      .monob { font-family: "Plex", monospace; font-weight: 700; letter-spacing: .06em; }
+      .sten { font-family: "Stencil", sans-serif; font-weight: 900; line-height: .86; letter-spacing: .01em; }
+      .serif { font-family: "Serif", serif; font-style: italic; }
+      .ink { filter: url(#inkRough); }
+      .dotted { flex: 1; border-bottom: 3px dotted rgba(27,23,20,.55); margin: 0 14px 10px; }
+
+      /* stock card (hook) */
+      #stock { left: 110px; top: 175px; width: 860px; height: 420px; padding: 34px 44px; transform: rotate(-2deg); border-radius: 6px; }
+      #stock .hd { display: flex; justify-content: space-between; font-size: 30px; border-bottom: 4px solid var(--ink); padding-bottom: 14px; }
+      #stock .row { display: flex; align-items: flex-end; font-size: 40px; margin-top: 44px; }
+      #stock .row b { font-family: "Plex"; font-weight: 700; }
+      #stock .st { color: var(--red); font-weight: 700; min-width: 300px; text-align: right; }
+      #stamp1 { left: 120px; top: 440px; width: 860px; text-align: center; transform: rotate(-9deg); }
+      .stampbox { display: inline-block; border: 14px solid var(--red); color: var(--red); padding: 10px 34px 0; border-radius: 10px; mix-blend-mode: multiply; }
+
+      /* work order */
+      #order { left: 130px; top: 640px; width: 820px; padding: 24px 36px 28px; transform: rotate(1.4deg); border-radius: 6px; }
+      #order .hd { display: flex; justify-content: space-between; font-size: 30px; }
+      #order h2 { font-size: 96px; margin: 12px 0 10px; white-space: nowrap; }
+      #order .items { display: flex; gap: 26px; border-top: 4px solid var(--ink); padding-top: 18px; }
+      #order .it { display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 700; font-family: "Plex"; }
+      .box { position: relative; width: 44px; height: 44px; border: 4px solid var(--ink); }
+      .box svg { position: absolute; left: -8px; top: -22px; width: 70px; height: 70px; overflow: visible; }
+      .box path { fill: none; stroke: var(--red); stroke-width: 9; stroke-linecap: round; stroke-linejoin: round; }
+      #approved { right: -20px; bottom: -46px; transform: rotate(8deg); }
+
+      /* hang tags */
+      .tag { left: 600px; top: 0; width: 400px; height: 640px; transform-origin: 200px -60px; }
+      .tag .string { position: absolute; left: 197px; top: -400px; width: 6px; height: 460px; background: linear-gradient(90deg,#e9e2d4,#bdb3a1); border-radius: 3px; }
+      .tag .card { position: absolute; left: 0; top: 40px; width: 400px; height: 580px; padding: 70px 34px 28px; clip-path: polygon(22% 0, 78% 0, 100% 9%, 100% 100%, 0 100%, 0 9%); border-radius: 4px; }
+      .tag .hole { position: absolute; left: 182px; top: 52px; width: 36px; height: 36px; border-radius: 50%; background: radial-gradient(circle, rgba(0,0,0,0) 46%, #8d6c3f 50%, #e7d9bf 64%, #a78a5a 80%); }
+      .tag .art { display: flex; justify-content: space-between; font-size: 28px; border-bottom: 3px solid var(--ink); padding-bottom: 10px; }
+      .tag h3 { font-size: 104px; margin: 18px 0 16px; }
+      .tag .sw { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+      .tag .chip { width: 74px; height: 74px; border-radius: 4px; box-shadow: inset 0 0 0 3px rgba(0,0,0,.25); }
+      .tag .sw div:last-child { font-size: 30px; line-height: 1.1; }
+      .tag .ln { display: flex; justify-content: space-between; font-size: 28px; padding: 9px 0; border-top: 2px dashed rgba(27,23,20,.45); }
+      .tag .ln span:last-child { font-weight: 700; }
+      .tag .note { font-size: 58px; color: #24315f; line-height: 1; margin-top: 10px; transform: rotate(-4deg); }
+      .tag .hic { position: absolute; left: 50px; top: 330px; transform: rotate(-14deg); }
+
+      /* tape measure */
+      .tm { left: -200px; width: 1700px; height: 128px; background: var(--tape); box-shadow: 0 18px 40px rgba(0,0,0,.35); overflow: hidden;
+        background-image:
+          repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 100px),
+          repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 50px),
+          repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 10px);
+        background-size: 100% 56px, 100% 38px, 100% 22px; background-repeat: repeat-x; background-position: 0 0, 0 0, 0 0; }
+      .tm .nums { position: absolute; left: 0; bottom: 8px; display: flex; font-family: "Plex"; font-weight: 700; font-size: 34px; color: var(--ink); }
+      .tm .nums span { width: 100px; text-align: left; padding-left: 8px; }
+      .tm .lbl { position: absolute; right: 230px; top: 40px; font-family: "Stencil"; font-size: 84px; color: var(--red); }
+
+      /* swatches */
+      .swc { top: 150px; width: 290px; height: 420px; background: #f6f2ea; padding: 14px; box-shadow: 0 26px 50px rgba(0,0,0,.35); }
+      .swc .c { height: 270px; }
+      .swc .t1 { font-family: "Plex"; font-weight: 700; font-size: 28px; margin-top: 16px; color: #222; letter-spacing: .08em; }
+      .swc .t2 { font-family: "Stencil"; font-size: 54px; white-space: nowrap; color: #111; margin-top: 14px; line-height: 1; }
+      .swc .t3 { font-family: "Plex"; font-size: 28px; color: #555; }
+      #swhead { left: 0; width: 1080px; top: 70px; text-align: center; font-size: 28px; color: var(--krem); text-shadow: 0 2px 8px rgba(0,0,0,.6); letter-spacing: .3em; }
+
+      /* final */
+      #final { left: 0; width: 1080px; top: 170px; text-align: center; }
+      #final .l { font-size: 178px; color: var(--krem); text-shadow: 9px 7px 0 var(--red), 0 20px 50px rgba(0,0,0,.35); }
+
+      /* dymo captions */
+      #caps { left: 0; top: 1250px; width: 1080px; height: 200px; }
+      .dymo { position: absolute; left: 50%; top: 0; transform: translateX(-50%); white-space: nowrap; padding: 18px 30px 16px; border-radius: 5px;
+        font-family: "Plex", monospace; font-weight: 700; font-size: 60px; letter-spacing: .14em; color: #fbfbf7;
+        box-shadow: 0 14px 30px rgba(0,0,0,.4), inset 0 2px 0 rgba(255,255,255,.18), inset 0 -3px 0 rgba(0,0,0,.25);
+        text-shadow: 0 -2px 0 rgba(0,0,0,.45), 0 2px 0 rgba(255,255,255,.28); }
+      .dymo::before, .dymo::after { content: ""; position: absolute; top: 0; bottom: 0; width: 16px; background: inherit; }
+      .dymo::before { left: -10px; clip-path: polygon(100% 0, 0 12%, 60% 30%, 0 50%, 60% 70%, 0 88%, 100% 100%); }
+      .dymo::after { right: -10px; clip-path: polygon(0 0, 100% 12%, 40% 30%, 100% 50%, 40% 70%, 100% 88%, 0 100%); }
+      .dymo .ch { opacity: 0; }
+      .t-red { background: linear-gradient(180deg,#d4433b,#a8251f); }
+      .t-black { background: linear-gradient(180deg,#2b2b2b,#0d0d0d); }
+      .t-blue { background: linear-gradient(180deg,#2a5ad6,#173c9c); }
+      .t-ochre { background: linear-gradient(180deg,#d29a3a,#a87220); color: #1b1410; text-shadow: 0 2px 0 rgba(255,240,200,.45), 0 -1px 0 rgba(0,0,0,.4); }
+      .t-cream { background: linear-gradient(180deg,#f3ead8,#d8ccb3); color: #1b1410; text-shadow: 0 2px 0 rgba(255,255,255,.6), 0 -1px 0 rgba(0,0,0,.3); }
+      .dymo.big { font-size: 120px; padding: 18px 46px 12px; }
+    </style>
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute">
+      <filter id="inkRough" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="3" result="w" />
+        <feDisplacementMap in="SourceGraphic" in2="w" scale="7" result="d" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="11" result="g" />
+        <feColorMatrix in="g" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.55" result="m" />
+        <feComposite in="d" in2="m" operator="in" />
+      </filter>
+    </svg>
+
+    <div id="root" data-composition-id="main" data-start="0" data-duration="34.6" data-width="1080" data-height="1920">
+      <video id="base" class="clip" src="assets/base.mp4" data-start="0" data-duration="34.6" data-track-index="0" data-has-audio="true" playsinline></video>
+
+      <div id="ov" class="clip" data-start="0" data-duration="34.6" data-track-index="1">
+        <!-- HOOK: stock card -->
+        <div id="stock" class="abs kraft hide">
+          <div class="hd mono"><span>STOK KARTI</span><span>PULL&amp;BEAR × DICKIES</span></div>
+          <div class="row"><b>MAĞAZA</b><span class="dotted"></span><span class="st" id="st1"></span></div>
+          <div class="row"><b>ONLINE</b><span class="dotted"></span><span class="st" id="st2"></span></div>
+        </div>
+        <div id="stamp1" class="abs hide" data-layout-allow-overlap><div class="stampbox sten ink" style="font-size:200px">YOK SATMIŞ</div></div>
+
+        <!-- WORK ORDER -->
+        <div id="order" class="abs kraft hide">
+          <div class="hd mono"><span>İŞ EMRİ № 001</span><span>PARÇA KONTROLÜ</span></div>
+          <h2 class="sten">3 PARÇA · KONTROL</h2>
+          <div class="items">
+            <div class="it"><div class="box"><svg viewBox="0 0 70 70"><path style="stroke-dasharray:110;stroke-dashoffset:110" id="ck1" d="M8 38 L26 56 L64 6" /></svg></div>01 TİŞÖRT</div>
+            <div class="it"><div class="box"><svg viewBox="0 0 70 70"><path style="stroke-dasharray:110;stroke-dashoffset:110" id="ck2" d="M8 38 L26 56 L64 6" /></svg></div>02 ŞAPKA</div>
+            <div class="it"><div class="box"><svg viewBox="0 0 70 70"><path style="stroke-dasharray:110;stroke-dashoffset:110" id="ck3" d="M8 38 L26 56 L64 6" /></svg></div>03 CEKET</div>
+          </div>
+          <div id="approved" class="abs hide" data-layout-allow-overlap><div class="stampbox sten ink" style="font-size:88px;border-width:9px;padding:6px 20px 0">ONAYLANDI</div></div>
+        </div>
+
+        <!-- TAG 01 -->
+        <div id="tag1" class="abs tag hide">
+          <div class="string"></div>
+          <div class="card kraft">
+            <div class="art mono"><span>ART. 01 / 03</span><span>PB×DK</span></div>
+            <h3 class="sten">TİŞÖRT</h3>
+            <div class="sw"><div class="chip" style="background:var(--kobalt)"></div><div class="monob">KOBALT<br /><span class="mono" style="font-size:28px">#1E4FC9</span></div></div>
+            <div class="ln mono"><span>BEDEN</span><span>XL</span></div>
+            <div class="ln mono" id="t1kesim"><span>KESİM</span><span>BOXY FIT</span></div>
+            <div class="ln mono" id="t1det"><span>DETAY</span><span>CEP LOGO</span></div>
+          </div>
+          <div class="hole"></div>
+        </div>
+
+        <!-- TAG 02 -->
+        <div id="tag2" class="abs tag hide">
+          <div class="string"></div>
+          <div class="card kraft">
+            <div class="art mono"><span>ART. 02 / 03</span><span>PB×DK</span></div>
+            <h3 class="sten">ŞAPKA</h3>
+            <div class="sw"><div class="chip" style="background:var(--antrasit)"></div><div class="monob">ANTRASİT<br /><span class="mono" style="font-size:28px">#3B3538</span></div></div>
+            <div class="ln mono"><span>NOT</span><span></span></div>
+            <div class="note serif" id="t2note">“bana yakışmaz”</div>
+          </div>
+          <div class="hole"></div>
+          <div class="hic abs hide" id="t2hic" data-layout-allow-overlap><div class="stampbox sten ink" style="font-size:150px;border-width:11px">HİÇ.</div></div>
+        </div>
+
+        <!-- TAG 03 -->
+        <div id="tag3" class="abs tag hide">
+          <div class="string"></div>
+          <div class="card kraft">
+            <div class="art mono"><span>ART. 03 / 03</span><span>PB×DK</span></div>
+            <h3 class="sten">CEKET</h3>
+            <div class="sw"><div class="chip" style="background:var(--okra)"></div><div class="monob">OKRA<br /><span class="mono" style="font-size:28px">#C38A2C</span></div></div>
+            <div class="ln mono"><span>BEDEN</span><span>L</span></div>
+            <div class="ln mono"><span>TİP</span><span>İŞ CEKETİ</span></div>
+            <div class="ln mono" id="t3arka"><span>ARKA</span><span>DEV LOGO ↓</span></div>
+          </div>
+          <div class="hole"></div>
+        </div>
+
+        <!-- RAMP: tape measures -->
+        <div id="tm1" class="abs tm hide" style="top:330px; transform: rotate(-8deg)">
+          <div class="nums" id="nums1"></div>
+        </div>
+        <div id="tm2" class="abs tm hide" style="top:1420px; transform: rotate(6deg)">
+          <div class="nums" id="nums2"></div>
+        </div>
+
+        <div id="prova" class="abs hide" style="left:0;width:1080px;top:640px;text-align:center"><span class="sten" style="font-size:230px;color:var(--tape);text-shadow:9px 7px 0 var(--ink)">PROVA</span><span class="monob" style="display:block;font-size:44px;color:var(--krem);letter-spacing:.4em;text-shadow:0 2px 10px rgba(0,0,0,.7)">HIZ ×4</span></div>
+
+        <!-- TONES -->
+        <div id="swhead" class="abs monob hide">TON KARTELASI</div>
+        <div id="sw1" class="abs swc hide" style="left:60px; transform:rotate(-5deg)"><div class="c" style="background:var(--okra)"></div><div class="t1">01 · CEKET</div><div class="t2">OKRA</div><div class="t3">#C38A2C</div></div>
+        <div id="sw2" class="abs swc hide" style="left:395px; transform:rotate(1deg)"><div class="c" style="background:#ece6da"></div><div class="t1">02 · TİŞÖRT</div><div class="t2">BEYAZ</div><div class="t3">#ECE6DA</div></div>
+        <div id="sw3" class="abs swc hide" style="left:730px; transform:rotate(6deg)"><div class="c" style="background:var(--antrasit)"></div><div class="t1">03 · ŞAPKA</div><div class="t2">ANTRASİT</div><div class="t3">#3B3538</div></div>
+
+        <!-- FINAL -->
+        <div id="final" class="abs hide">
+          <div class="l sten" id="fl1">GÖRÜRSENİZ</div>
+          <div class="l sten" id="fl2">KAÇIRMAYIN</div>
+        </div>
+
+        <!-- CAPTIONS -->
+        <div id="caps" class="abs"></div>
+      </div>
+
+      <audio id="sfx01" class="sfx" src="assets/sfx/swish.wav" data-start="0.02" data-duration="0.5" data-volume="0.35"></audio>
+      <audio id="sfx02" class="sfx" src="assets/sfx/stamp.wav" data-start="2.14" data-duration="0.45" data-volume="0.9"></audio>
+      <audio id="sfx03" class="sfx" src="assets/sfx/swish.wav" data-start="4.36" data-duration="0.5" data-volume="0.35"></audio>
+      <audio id="sfx04" class="sfx" src="assets/sfx/swish.wav" data-start="8.2" data-duration="0.5" data-volume="0.4"></audio>
+      <audio id="sfx05" class="sfx" src="assets/sfx/stamp.wav" data-start="10.56" data-duration="0.45" data-volume="0.45"></audio>
+      <audio id="sfx06" class="sfx" src="assets/sfx/swish.wav" data-start="14.6" data-duration="0.5" data-volume="0.4"></audio>
+      <audio id="sfx07" class="sfx" src="assets/sfx/stamp.wav" data-start="18.3" data-duration="0.45" data-volume="0.85"></audio>
+      <audio id="sfx08" class="sfx" src="assets/sfx/swish.wav" data-start="18.7" data-duration="0.5" data-volume="0.4"></audio>
+      <audio id="sfx09" class="sfx" src="assets/sfx/zip.wav" data-start="24.36" data-duration="0.9" data-volume="0.5"></audio>
+      <audio id="sfx10" class="sfx" src="assets/sfx/zip.wav" data-start="25.6" data-duration="0.9" data-volume="0.4"></audio>
+      <audio id="sfx11" class="sfx" src="assets/sfx/swish.wav" data-start="27.1" data-duration="0.5" data-volume="0.3"></audio>
+      <audio id="sfx12" class="sfx" src="assets/sfx/swish.wav" data-start="27.86" data-duration="0.5" data-volume="0.3"></audio>
+      <audio id="sfx13" class="sfx" src="assets/sfx/swish.wav" data-start="28.52" data-duration="0.5" data-volume="0.3"></audio>
+      <audio id="sfx14" class="sfx" src="assets/sfx/stamp.wav" data-start="30.56" data-duration="0.45" data-volume="0.7"></audio>
+      <audio id="sfx15" class="sfx" src="assets/sfx/stamp.wav" data-start="31.74" data-duration="0.45" data-volume="0.85"></audio>
+      <audio id="sfx16" class="sfx" src="assets/sfx/stamp.wav" data-start="32.5" data-duration="0.45" data-volume="0.85"></audio>
+      <audio id="sfx17" class="sfx" src="assets/sfx/click.wav" data-start="0.00" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx18" class="sfx" src="assets/sfx/click.wav" data-start="1.29" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx19" class="sfx" src="assets/sfx/click.wav" data-start="2.01" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx20" class="sfx" src="assets/sfx/click.wav" data-start="2.81" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx21" class="sfx" src="assets/sfx/click.wav" data-start="3.53" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx22" class="sfx" src="assets/sfx/click.wav" data-start="4.41" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx23" class="sfx" src="assets/sfx/click.wav" data-start="4.81" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx24" class="sfx" src="assets/sfx/click.wav" data-start="5.91" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx25" class="sfx" src="assets/sfx/click.wav" data-start="6.79" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx26" class="sfx" src="assets/sfx/click.wav" data-start="8.35" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx27" class="sfx" src="assets/sfx/click.wav" data-start="10.29" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx28" class="sfx" src="assets/sfx/click.wav" data-start="12.39" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx29" class="sfx" src="assets/sfx/click.wav" data-start="12.87" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx30" class="sfx" src="assets/sfx/click.wav" data-start="14.69" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx31" class="sfx" src="assets/sfx/click.wav" data-start="16.19" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx32" class="sfx" src="assets/sfx/click.wav" data-start="16.83" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx33" class="sfx" src="assets/sfx/click.wav" data-start="18.29" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx34" class="sfx" src="assets/sfx/click.wav" data-start="18.81" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx35" class="sfx" src="assets/sfx/click.wav" data-start="21.49" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx36" class="sfx" src="assets/sfx/click.wav" data-start="23.17" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx37" class="sfx" src="assets/sfx/click.wav" data-start="27.15" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx38" class="sfx" src="assets/sfx/click.wav" data-start="28.13" data-duration="0.04" data-volume="0.22"></audio>
+      <audio id="sfx39" class="sfx" src="assets/sfx/click.wav" data-start="29.77" data-duration="0.04" data-volume="0.22"></audio>
+    </div>
+
+    <script>
+      // ---------- Captions (edit-timeline word timings from Whisper, corrected) ----------
+      // [chunkStart, chunkEnd, tapeClass, [[word, t], ...], big?]
+      const CAPS = [
+        [0.0, 1.3, "t-red", [["MAĞAZA", 0.0], ["PERSONELİYLE", 0.62]]],
+        [1.3, 1.98, "t-red", [["KONUŞTUM", 1.3]]],
+        [2.02, 2.78, "t-red", [["YOK", 2.02], ["SATMIŞ", 2.16]]],
+        [2.82, 3.54, "t-red", [["ZATEN", 2.82], ["ONLINE'DA", 3.02]]],
+        [3.54, 4.38, "t-red", [["HİÇ", 3.54], ["STOK", 3.74], ["YOK", 4.12]]],
+        [4.42, 4.82, "t-black", [["GELİN", 4.42], ["BİRLİKTE", 4.64]]],
+        [4.82, 5.92, "t-black", [["PULL&BEAR", 4.82], ["×", 5.38], ["DICKIES", 5.48]]],
+        [5.92, 6.8, "t-black", [["İŞ", 5.92], ["BİRLİĞİNDEN", 6.06], ["ALDIĞIM", 6.42]]],
+        [6.8, 7.82, "t-black", [["PARÇALARA", 6.8], ["BAKALIM", 7.3]]],
+        [8.36, 9.95, "t-blue", [["ŞÖYLE", 8.36], ["BİR", 8.74], ["T-SHIRT", 8.94], ["ALDIM", 9.3]]],
+        [10.3, 11.75, "t-blue", [["BAYA", 10.3], ["BOXY", 10.56], ["FIT", 11.18]]],
+        [12.4, 12.88, "t-blue", [["BURASI", 12.4], ["DA", 12.7]]],
+        [12.88, 14.29, "t-blue", [["UFAK", 12.88], ["BİR", 13.2], ["DETAYI", 13.4], ["VAR", 13.8]]],
+        [14.7, 15.96, "t-black", [["ŞÖYLE", 14.7], ["BİR", 14.86], ["ŞAPKA", 15.06], ["ALDIM", 15.46]]],
+        [16.2, 16.84, "t-black", [["NORMALDE", 16.2], ["ŞAPKA", 16.5]]],
+        [16.84, 18.25, "t-black", [["YAKIŞTIRMIYORUM", 16.84], ["KENDİME", 17.58]]],
+        [18.3, 18.72, "t-red", [["HİÇ.", 18.3]], true],
+        [18.82, 20.95, "t-ochre", [["ŞÖYLE", 18.82], ["BİR", 19.18], ["CEKET", 19.46], ["ALDIM", 20.28]]],
+        [21.5, 23.18, "t-ochre", [["ARKASINDA", 21.5], ["KOCAMAN", 22.18]]],
+        [23.18, 24.3, "t-ochre", [["BİR", 23.18], ["LOGOSU", 23.38], ["VAR", 23.84]]],
+        [27.16, 28.14, "t-cream", [["BU", 27.16], ["TONLAR", 27.3], ["BİRLİKTE", 27.92]]],
+        [28.14, 29.7, "t-cream", [["BAYA", 28.14], ["İYİ", 28.58], ["GİDİYOR", 28.94]]],
+        [29.78, 31.2, "t-black", [["BAYA", 29.78], ["İYİ", 30.18], ["BİR", 30.46], ["İŞ BİRLİĞİ", 30.58]]],
+      ];
+      const caps = document.getElementById("caps");
+      const ROT = [-1.6, 1.2, -0.8, 1.8, -1.2, 0.9];
+      CAPS.forEach((c, i) => {
+        const d = document.createElement("div");
+        d.className = "dymo " + c[2] + (c[4] ? " big" : "");
+        d.id = "cap" + i;
+        d.style.opacity = 0;
+        c[3].forEach((w, wi) => {
+          if (wi) d.appendChild(document.createTextNode(" "));
+          [...w[0]].forEach((ch) => {
+            const s = document.createElement("span");
+            s.className = "ch w" + wi;
+            s.textContent = ch;
+            d.appendChild(s);
+          });
+        });
+        caps.appendChild(d);
+      });
+      // tape measure numbers
+      ["nums1", "nums2"].forEach((id, k) => {
+        const n = document.getElementById(id);
+        for (let i = 0; i < 17; i++) {
+          const s = document.createElement("span");
+          s.textContent = k ? 160 - i * 10 : 40 + i * 10;
+          n.appendChild(s);
+        }
+      });
+
+      // ---------- Timeline ----------
+      const tl = gsap.timeline({ paused: true });
+      const show = (sel, t) => tl.set(sel, { visibility: "visible" }, t);
+      const hide = (sel, t) => tl.set(sel, { visibility: "hidden", opacity: 0 }, t);
+
+      function shake(t, amp = 14) {
+        const seq = [[amp, -amp * 0.6], [-amp * 0.8, amp * 0.5], [amp * 0.5, amp * 0.3], [-amp * 0.25, -amp * 0.2], [0, 0]];
+        seq.forEach(([x, y], i) => tl.to("#base", { x, y, duration: 0.035, ease: "none" }, t + i * 0.035));
+      }
+      function stamp(sel, t, rot = -9) {
+        show(sel, t);
+        tl.fromTo(sel, { opacity: 0, scale: 2.4, rotation: rot - 6 }, { opacity: 1, scale: 1, rotation: rot, duration: 0.14, ease: "power4.in" }, t);
+        tl.to(sel, { scale: 1.04, duration: 0.05, yoyo: true, repeat: 1, ease: "power1.out" }, t + 0.14);
+      }
+      function typeText(sel, text, t, step = 0.03) {
+        const el = document.querySelector(sel);
+        el.textContent = "";
+        [...text].forEach((ch, i) => {
+          const s = document.createElement("span");
+          s.textContent = ch;
+          s.style.opacity = 0;
+          el.appendChild(s);
+          tl.set(s, { opacity: 1 }, t + i * step);
+        });
+      }
+      function check(sel, t) {
+        const p = document.querySelector(sel);
+        const L = 110;
+        p.style.strokeDasharray = L;
+        p.style.strokeDashoffset = L;
+        tl.to(sel, { strokeDashoffset: 0, duration: 0.18, ease: "power2.out" }, t);
+      }
+
+      // HOOK ---------------------------------------------------------
+      show("#stock", 0);
+      tl.fromTo("#stock", { opacity: 0, y: -520, rotation: -12 }, { opacity: 1, y: 0, rotation: -2, duration: 0.45, ease: "back.out(1.4)" }, 0.02);
+      typeText("#st1", "✕ TÜKENDİ", 2.0);
+      stamp("#stamp1", 2.14, -9);
+      shake(2.28, 18);
+      typeText("#st2", "✕ STOK YOK", 3.74);
+      tl.to(["#stock", "#stamp1"], { y: -760, rotation: 8, duration: 0.32, ease: "power3.in" }, 4.1);
+      hide(["#stock", "#stamp1"], 4.45);
+
+      // WORK ORDER --------------------------------------------------
+      show("#order", 4.4);
+      tl.fromTo("#order", { opacity: 0, y: 900, rotation: 10 }, { opacity: 1, y: 0, rotation: 1.4, duration: 0.5, ease: "back.out(1.3)" }, 4.4);
+      tl.to("#order", { y: -1100, rotation: -6, duration: 0.36, ease: "power3.in" }, 7.62);
+      hide("#order", 8.0);
+
+      // TAGS --------------------------------------------------------
+      function tagIn(sel, t) {
+        show(sel, t);
+        tl.fromTo(sel, { opacity: 1, y: -760, rotation: -38 }, { y: 0, duration: 0.42, ease: "power3.out" }, t);
+        tl.fromTo(sel, { rotation: -38 }, { rotation: 0, duration: 1.6, ease: "elastic.out(1.1,0.28)" }, t);
+      }
+      function tagOut(sel, t) {
+        tl.to(sel, { y: -820, rotation: 14, duration: 0.3, ease: "power3.in" }, t);
+        hide(sel, t + 0.32);
+      }
+      function lnPop(sel, t) {
+        tl.fromTo(sel, { opacity: 0.0, x: -30 }, { opacity: 1, x: 0, duration: 0.2, ease: "power2.out" }, t);
+      }
+      tl.set(["#t1kesim", "#t1det", "#t2note", "#t3arka"], { opacity: 0 }, 0);
+      tagIn("#tag1", 8.22);
+      lnPop("#t1kesim", 10.56);
+      lnPop("#t1det", 12.88);
+      tagOut("#tag1", 14.4);
+
+      tagIn("#tag2", 14.6);
+      tl.fromTo("#t2note", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(2)" }, 16.84);
+      stamp("#t2hic", 18.3, -14);
+      shake(18.44, 12);
+      tagOut("#tag2", 18.62);
+
+      tagIn("#tag3", 18.7);
+      lnPop("#t3arka", 21.68);
+      tl.to("#t3arka span:last-child", { y: 10, duration: 0.25, yoyo: true, repeat: 5, ease: "sine.inOut" }, 21.9);
+      tagOut("#tag3", 24.2);
+
+      // RAMP: tape measures zip across --------------------------------
+      show(["#tm1", "#tm2"], 24.36);
+      tl.fromTo("#tm1", { opacity: 1, x: -1900 }, { x: 900, duration: 2.5, ease: "power1.inOut" }, 24.36);
+      tl.fromTo("#tm2", { opacity: 1, x: 1900 }, { x: -1400, duration: 2.5, ease: "power1.inOut" }, 24.36);
+      hide(["#tm1", "#tm2"], 26.9);
+      show("#prova", 24.5);
+      tl.fromTo("#prova", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.18, ease: "power3.out" }, 24.5);
+      tl.to("#prova", { opacity: 0, scale: 0.9, duration: 0.18 }, 26.6);
+      hide("#prova", 26.8);
+
+      // TONES -------------------------------------------------------
+      show("#swhead", 27.0);
+      tl.fromTo("#swhead", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.25 }, 27.0);
+      [["#sw1", 27.16, -5], ["#sw2", 27.92, 1], ["#sw3", 28.58, 6]].forEach(([s, t, r]) => {
+        show(s, t);
+        tl.fromTo(s, { opacity: 0, y: -700, rotation: r - 20 }, { opacity: 1, y: 0, rotation: r, duration: 0.42, ease: "back.out(1.6)" }, t);
+      });
+      tl.to(["#sw1", "#sw2", "#sw3", "#swhead"], { y: -900, duration: 0.3, ease: "power3.in", stagger: 0.04 }, 29.55);
+      hide(["#sw1", "#sw2", "#sw3", "#swhead"], 30.0);
+
+      // COLLAB: order returns, all checked, approved ----------------
+      tl.set("#order", { visibility: "visible", opacity: 1, y: -1100, rotation: -6 }, 29.74);
+      tl.to("#order", { y: 0, rotation: 1.4, duration: 0.36, ease: "back.out(1.3)" }, 29.74);
+      tl.set(["#ck1", "#ck2", "#ck3"], { strokeDashoffset: 110 }, 29.7);
+      tl.to("#ck1", { strokeDashoffset: 0, duration: 0.16 }, 30.0);
+      tl.to("#ck2", { strokeDashoffset: 0, duration: 0.16 }, 30.18);
+      tl.to("#ck3", { strokeDashoffset: 0, duration: 0.16 }, 30.36);
+      stamp("#approved", 30.56, 8);
+      shake(30.7, 9);
+      tl.to("#order", { y: -1100, rotation: -8, duration: 0.3, ease: "power3.in" }, 31.4);
+      hide("#order", 31.72);
+
+      // FINAL -------------------------------------------------------
+      show("#final", 31.7);
+      tl.set("#fl2", { opacity: 0 }, 31.7);
+      tl.fromTo("#final", { opacity: 1 }, { opacity: 1, duration: 0.01 }, 31.7);
+      tl.fromTo("#fl1", { opacity: 0, scale: 2.2, rotation: -4 }, { opacity: 1, scale: 1, rotation: -3, duration: 0.14, ease: "power4.in" }, 31.74);
+      shake(31.88, 16);
+      tl.fromTo("#fl2", { opacity: 0, scale: 2.2, rotation: 3 }, { opacity: 1, scale: 1, rotation: 2, duration: 0.14, ease: "power4.in" }, 32.5);
+      shake(32.64, 16);
+      tl.to("#final", { scale: 1.03, duration: 1.8, ease: "sine.out" }, 32.7);
+
+      // CAPTIONS ----------------------------------------------------
+      CAPS.forEach((c, i) => {
+        const id = "#cap" + i;
+        const [t0, t1, , words] = c;
+        const r = ROT[i % ROT.length];
+        tl.fromTo(id, { opacity: 0, scaleX: 0.7, rotation: r, xPercent: -50, x: 0 }, { opacity: 1, scaleX: 1, rotation: r, duration: 0.09, ease: "power2.out" }, t0);
+        words.forEach((w, wi) => {
+          const chars = document.querySelectorAll(id + " .w" + wi);
+          chars.forEach((ch, k) => tl.set(ch, { opacity: 1 }, w[1] + k * 0.016));
+        });
+        tl.to(id, { opacity: 0, y: 14, duration: 0.07 }, t1 - 0.07);
+      });
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
